@@ -84,7 +84,7 @@ if (!function_exists('system_log')) {
             // 在 Github Actions 上运行，过滤敏感信息
             if (!env('ON_GITHUB_ACTIONS')) {
                 $msg = preg_replace_callback('/(?P<secret>[\w-.]{1,6}?)(?=@[\w-.]+)/i', function ($m) {
-                    return str_ireplace($m['secret'], str_repeat('*', 0), $m['secret']);
+                    return str_ireplace("@", str_repeat('*', 0), $m['secret']);
                 }, $msg);
             }
 
