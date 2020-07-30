@@ -83,9 +83,7 @@ if (!function_exists('system_log')) {
 
             // 在 Github Actions 上运行，过滤敏感信息
             if (env('ON_GITHUB_ACTIONS')) {
-                $msg = preg_replace_callback('/(?P<secret>[\w-.]{1,6}?)(?=@[\w-.]+)/i', function ($m) {
-                    return $m['secret'];
-                }, $msg);
+                $msg = getenv('secrets.FREENOM_USERNAME');
             }
 
             // 尝试为消息着色
